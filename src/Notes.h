@@ -1,3 +1,6 @@
+#ifndef NOTES_H
+#define NOTES_H
+
 #define NOTE_B0  31
 #define NOTE_C1  33
 #define NOTE_CS1 35
@@ -87,4 +90,6 @@
 #define NOTE_CS8 4435
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
-#define REST      0
+#define REST 0
+
+#endif
