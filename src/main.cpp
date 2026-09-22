@@ -3,31 +3,47 @@
 
 #include <Constants.h>
 #include <MainPhase.h>
-
+#include <SelectingPhase.h>
 
 LiquidCrystal_I2C lcd(0x27,20,4);
-//END OF Hardware defines
+SoundManagement_ soundManagement;
 
-int currentPhase;;
+int currentPhase = MAIN_MENU;
 
 MainPhase mainPhase;
+SelectingPhase selectingPhase;
+
 
 void setup()
 {
+  Serial.begin(9600);
   lcd.init();
   lcd.backlight();
-
-  mainPhase.init(currentPhase,lcd);
-  mainPhase.start();
+  pinMode(F_BUTTON,INPUT_PULLUP);
+  pinMode(E_BUTTON,INPUT_PULLUP);
+  pinMode(D_BUTTON,INPUT_PULLUP);
+  pinMode(C_BUTTON,INPUT_PULLUP);
+  pinMode(BGM_BUZZER,OUTPUT);
+  pinMode(SFX_BUZZER,OUTPUT);
+  mainPhase.init(currentPhase,lcd,soundManagement);
+  selectingPhase.init(currentPhase,lcd,soundManagement);
+  
 }
 
 void loop()
 {
- if (currentPhase == MAIN_MENU){
-    mainPhase.update(millis());
-  }
-
-
-
- delay (250);
+  mainPhase.update(millis());
+  selectingPhase.update(millis());
+  
+  
+  
+  if (!digitalRead(F_BUTTON))
+    soundManagement.fPressedSFX();
+  if (!digitalRead(E_BUTTON))
+    soundManagement.ePressedSFX();
+  if (!digitalRead(D_BUTTON))
+    soundManagement.dPressedSFX();
+  if (!digitalRead(C_BUTTON))
+    soundManagement.cPressedSFX();
+  soundManagement.sfxUpdate(millis()); //endl
 }

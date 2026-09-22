@@ -1,17 +1,17 @@
 #include <Music.h>
 
 
-Music::Music(int melody[], int bpm,int noteSize){
-    this->melody = melody;
-    this->tempo = bpm;
-    this->notes=noteSize;
-
-    this->init();
+Music::Music(int buzzer,const int* melody, int bpm,int noteSize){
+    this->melody    = melody;
+    this->tempo     = bpm;
+    this->notes     = noteSize;
+    this->buzzerPIN = buzzer;
     
 }
 
 void Music::raiseBPM(int bpm){
     this->tempo += bpm;
+    this->init();
 }
 
 int Music::getCurrentBPM(){
@@ -19,15 +19,15 @@ int Music::getCurrentBPM(){
 }
 
 bool Music::updateMusic(long currentMillis){
-    if (this->currentNote > this->notes)
+    if (this->currentNote >= this->notes)
         return false; //music has ended
     
     if (currentMillis - this->lastNoteTime < this->noteDuration)
         return true; //silence
-    noTone(BUZZER_PIN); // To cancel previous tone
+    noTone(this->buzzerPIN); // To cancel previous tone
 
     // calculates the duration of each note
-    this->divider = this->melody[this->currentNote + 1];
+    this->divider = pgm_read_word(&this->melody[this->currentNote + 1]);
     if (this->divider > 0) {
       // regular note, just proceed
       this->noteDuration = (this->wholenote) / this->divider;
@@ -37,7 +37,7 @@ bool Music::updateMusic(long currentMillis){
       this->noteDuration *= 1.5; // increases the duration in half for dotted notes
     }
 
-    tone(BUZZER_PIN, melody[this->currentNote], this->noteDuration*0.9);
+    tone(this->buzzerPIN, pgm_read_word(&this->melody[this->currentNote]), this->noteDuration*0.9);
     this->lastNoteTime = currentMillis;
     this->currentNote = this->currentNote + 2;
     return true;
@@ -52,5 +52,5 @@ void Music::init(){
 }
 
 void Music::pause(){
-    noTone(BUZZER_PIN);
+    noTone(this->buzzerPIN);
 }

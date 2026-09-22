@@ -13,7 +13,8 @@
 //Hardware defines
 #define RED_LED 5
 #define GREEN_LED 6
-#define BUZZER 11
+#define BGM_BUZZER 11
+#define SFX_BUZZER 10
 
 //PUSH BUTTONS
 #define E_BUTTON 8
@@ -21,5 +22,9 @@
 #define C_BUTTON 4
 #define F_BUTTON 2
 //END of Hardwre defines
+
+
+
+
 
 #endif

@@ -71,7 +71,8 @@
     { "type": "wokwi-text", "id": "text3", "top": -76.8, "left": 403.2, "attrs": { "text": "E" } },
     { "type": "wokwi-text", "id": "text4", "top": -9.6, "left": 499.2, "attrs": { "text": "F" } },
     { "type": "wokwi-text", "id": "text5", "top": -9.6, "left": 403.2, "attrs": { "text": "D" } },
-    { "type": "wokwi-text", "id": "text6", "top": 57.6, "left": 403.2, "attrs": { "text": "C" } }
+    { "type": "wokwi-text", "id": "text6", "top": 57.6, "left": 403.2, "attrs": { "text": "C" } },
+    { "type": "wokwi-buzzer", "id": "bz2", "top": 156, "left": 357, "attrs": { "volume": "0.1" } }
   ],
   "connections": [
     [ "bz1:2", "uno:11", "green", [ "v19.2", "h182", "v192", "h-220.8", "v67.2" ] ],
@@ -91,7 +92,9 @@
     [ "led2:C", "uno:GND.1", "gray", [ "v9.6", "h-134", "v240", "h172.8", "v38.4" ] ],
     [ "led1:A", "uno:5", "red", [ "v9.6", "h124.8", "v249.6", "h-195.8" ] ],
     [ "led2:A", "uno:6", "green", [ "v19.2", "h-134.4", "v220.8", "h245.9" ] ],
-    [ "led1:C", "uno:GND.1", "gray", [ "v19.2", "h115.6", "v230.4", "h-269.1" ] ]
+    [ "led1:C", "uno:GND.1", "gray", [ "v19.2", "h115.6", "v230.4", "h-269.1" ] ],
+    [ "bz2:2", "uno:10", "green", [ "v28.8", "h-144.4", "v-76.8", "h-134.4" ] ],
+    [ "bz2:1", "uno:GND.3", "gray", [ "v9.6", "h-38.4", "v-96", "h86.4", "v297.6", "h-292" ] ]
   ],
   "dependencies": {}
 }
